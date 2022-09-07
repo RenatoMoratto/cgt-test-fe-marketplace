@@ -1,81 +1,22 @@
-import pictureA from './a.jpg';
-import pictureB from './b.jpg';
-
-function cartItems() {
-  return []
-}
+import Header from "./components/Header";
+import Cart from "./pages/Cart";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import { CartProvider } from "./store/cart-context";
 
 function App() {
-  return (
-    <main>
-      <header>
-        90s shop
-        <nav>
-          <ul style={{listStyleType: 'none', display: 'flex'}}>
-            <li><a href="/">Home</a></li>
-            |
-            <li><a href="/cart">Cart ({cartItems().length})</a></li>
-          </ul>
-        </nav>
-        <hr/>
-      </header>
+	const pathname = window.location.pathname;
 
-      {
-        window.location.pathname === '/' && (
-          <div>
-            Welcome to our shop!
-
-            <p>
-              You are probably interested in <a href="/products/a">A</a>.
-            </p>
-
-            <p>
-              Check out the newest product <a href="/products/b">B</a>!
-            </p>
-          </div>
-        )
-      }
-      {
-        window.location.pathname === '/products/b' && (
-          <div>
-            <h1>Product B</h1>
-            <p>Price: 30 USD</p>
-
-            <button onClick={() => console.warn('Not implemented!')}>
-              Add to cart
-            </button>
-
-            <div><img src={pictureB} width={640}/></div>
-          </div>
-        )
-      }
-      {
-        window.location.pathname === '/products/a' && (
-          <div>
-            <h1>Product A</h1>
-            <p>Price: 10 USD</p>
-
-            <button onClick={() => console.warn('Not implemented!')}>
-              Add to cart
-            </button>
-
-            <div><img src={pictureA} width={640}/></div>
-          </div>
-        )
-      }
-      {
-        window.location.pathname === '/cart' && (
-          <div>
-            Are you ready to purchase these?
-
-            <ul>
-              {cartItems().map((cartItem) => <li key={cartItem}>{cartItem}</li>)}
-            </ul>
-          </div>
-        )
-      }
-    </main>
-  );
+	return (
+		<CartProvider>
+			<Header />
+			<main>
+				{pathname === "/" && <Home />}
+				{pathname === "/products" && <Product />}
+				{pathname === "/cart" && <Cart />}
+			</main>
+		</CartProvider>
+	);
 }
 
 export default App;
