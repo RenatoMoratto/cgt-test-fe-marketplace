@@ -47,10 +47,16 @@ export function CartProvider({ children }) {
 		});
 	}
 
+	function clearCartHandler() {
+		localStorage.removeItem("cart");
+		setCart(defaultCartState);
+	}
+
 	const cartContext = {
 		items: cart.items,
 		totalAmount: cart.totalAmount,
 		addItem: addItemToCartHandler,
+		clearCart: clearCartHandler,
 	};
 	return <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>;
 }
