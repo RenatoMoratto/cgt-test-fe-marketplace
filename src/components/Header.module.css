@@ -8,11 +8,12 @@
 	justify-content: space-between;
 	padding: 0 10%;
 	background-color: #131313;
+	z-index: 1000;
 }
 
 .header h1,
 .navbar a {
-	color: #F9F9F9;
+	color: #f9f9f9;
 }
 
 .navbar {
@@ -29,7 +30,8 @@
 	border-radius: 18px;
 	font-weight: bold;
 	background-color: #4c2c93;
-	color: #F9F9F9;
+	color: #f9f9f9;
+	transition: all 1s;
 }
 
 .button:hover,
@@ -42,7 +44,8 @@
 	border-radius: 25px;
 	margin-left: 1rem;
 	font-weight: bold;
-	background-color: #834BFF;
+	background-color: #834bff;
+	transition: all 1s;
 }
 
 .button:hover .badge,
@@ -54,4 +57,26 @@
 	width: 1.35rem;
 	height: 1.35rem;
 	margin-right: 0.5rem;
+}
+
+.bump {
+	animation: bump 300ms ease-out;
+}
+
+@keyframes bump {
+	0% {
+		transform: scale(1);
+	}
+	10% {
+		transform: scale(0.9);
+	}
+	30% {
+		transform: scale(1.05);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
