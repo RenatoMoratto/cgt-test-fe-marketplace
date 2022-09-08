@@ -1,38 +1,54 @@
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../api";
+import { getNewestProducts, getUserInterestProducts } from "../api";
+import Card from "../components/Card";
+import CardImage from "../components/CardImage";
+import styles from "./Home.module.css";
 
 function Home() {
-	const [products, setProducts] = useState([]);
+	const [userInterests, setUserInterests] = useState([]);
+	const [newests, setNewests] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-
-	const haveProducts = products.length > 0;
 
 	useEffect(() => {
 		setIsLoading(true);
 
-		getAllProducts()
-			.then(response => setProducts(response))
+		getUserInterestProducts()
+			.then(response => setUserInterests(response))
+			.finally(() => setIsLoading(false));
+
+		getNewestProducts()
+			.then(response => setNewests(response))
 			.finally(() => setIsLoading(false));
 	}, []);
 
 	return (
-		<>
-			<div>
-				Welcome to our shop!
-				{isLoading && <p>Loading...</p>}
-				{!isLoading && !haveProducts && <p>No products available.</p>}
-				{!isLoading && haveProducts && (
-					<>
-						<p>
-							You are probably interested in <a href={`/products?id=${products[0].id}`}>A</a>.
-						</p>
-						<p>
-							Check out the newest product <a href={`/products?id=${products[1].id}`}>B</a>!
-						</p>
-					</>
-				)}
-			</div>
-		</>
+		<div className={styles.home}>
+			<Card>
+				<h2>Welcome to our shop!</h2>
+			</Card>
+			{isLoading && <p>Loading...</p>}
+			{!isLoading && (
+				<div className={styles.products}>
+					<Card>
+						<h3>You are probably interested in:</h3>
+						<div className={styles["interest-products-grid"]}>
+							{userInterests.map(item => (
+								<CardImage href={`/products?id=${item.id}`} name={item.name} imageURL={item.imageURL} />
+							))}
+						</div>
+					</Card>
+					
+					<Card>
+						<h3>Check out the newest product!</h3>
+						<div className={styles["newest-products-grid"]}>
+							{newests.map(item => (
+								<CardImage href={`/products?id=${item.id}`} name={item.name} imageURL={item.imageURL} />
+							))}
+						</div>
+					</Card>
+				</div>
+			)}
+		</div>
 	);
 }
 
