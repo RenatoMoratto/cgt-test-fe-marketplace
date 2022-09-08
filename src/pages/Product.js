@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../store/cart-context";
+import Card from "../components/Card";
+import Button from "../components/Button";
 import { getProductById } from "../api";
 import styles from "./Product.module.css";
 
@@ -32,7 +34,8 @@ function Product() {
 					<div className={styles.image}>
 						<img src={product.imageURL} alt="" />
 					</div>
-					<div className={styles.card}>
+
+					<Card className={styles.card}>
 						<div className={styles.description}>
 							<h1>{product.name}</h1>
 							<p>{product.description}</p>
@@ -40,11 +43,9 @@ function Product() {
 
 						<div className={styles.price}>
 							<p>{product.price.toFixed(2)} USD</p>
-							<button className={styles.button} onClick={addToCartHandler}>
-								Add to cart
-							</button>
+							<Button onClick={addToCartHandler}>Add to cart</Button>
 						</div>
-					</div>
+					</Card>
 				</div>
 			)}
 		</>
