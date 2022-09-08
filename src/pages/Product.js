@@ -5,14 +5,23 @@ import Button from "../components/Button";
 import { getProductById } from "../api";
 import styles from "./Product.module.css";
 
+const defaultProductValue = {
+	name: "",
+	description: "",
+	imageURL: "",
+	price: 0.0,
+};
+
 function Product() {
 	const { addItem } = useContext(CartContext);
 
-	const [product, setProduct] = useState({});
+	const [product, setProduct] = useState(defaultProductValue);
 	const [isLoading, setIsLoading] = useState(true);
 
 	const query = window.location.search;
 	const id = query.replace("?id=", "");
+
+	const price = product.price.toFixed(2);
 
 	const addToCartHandler = () => {
 		addItem(product);
@@ -21,7 +30,7 @@ function Product() {
 	useEffect(() => {
 		setIsLoading(true);
 
-		getProductById(id)
+		getProductById(Number(id))
 			.then(response => setProduct(response))
 			.finally(() => setIsLoading(false));
 	}, [id]);
@@ -42,7 +51,7 @@ function Product() {
 						</div>
 
 						<div className={styles.price}>
-							<p>{product.price.toFixed(2)} USD</p>
+							<p>{price} USD</p>
 							<Button onClick={addToCartHandler}>Add to cart</Button>
 						</div>
 					</Card>
