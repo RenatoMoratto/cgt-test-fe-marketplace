@@ -1,0 +1,20 @@
+.cart {
+	margin-top: 1rem;
+}
+
+.cart p {
+	font-size: 1.5rem;
+}
+
+.total {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bold;
+	margin-top: 1rem;
+}
+
+.button-wrapper {
+	display: flex;
+	justify-content: flex-end;
+}

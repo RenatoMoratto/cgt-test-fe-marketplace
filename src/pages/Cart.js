@@ -1,5 +1,9 @@
 import { useContext } from "react";
+import CartItem from "../components/CartItem";
+import Card from "../components/Card";
+import Button from "../components/Button";
 import CartContext from "../store/cart-context";
+import styles from "./Cart.module.css";
 
 function Cart() {
 	const cartCtx = useContext(CartContext);
@@ -9,18 +13,27 @@ function Cart() {
 	};
 
 	return (
-		<div>
-			Are you ready to purchase these?
-			<ul>
+		<Card className={styles.cart}>
+			<p>Are you ready to purchase these?</p>
+			<ul className={styles["cart-items"]}>
 				{cartCtx.items.map(cartItem => (
-					<li key={cartItem.id}>
-						{cartItem.name}: ${cartItem.price.toFixed(2)} x{cartItem.amount}
-					</li>
+					<CartItem
+						key={cartItem.id}
+						name={cartItem.name}
+						price={cartItem.price}
+						amount={cartItem.amount}
+						image={cartItem.imageURL}
+					/>
 				))}
 			</ul>
-			<p>Total Amount: ${cartCtx.totalAmount.toFixed(2)}</p>
-			<button onClick={submitOrderHandler}>Order</button>
-		</div>
+			<div className={styles.total}>
+				<p>Total Amount:</p>
+				<p>${cartCtx.totalAmount.toFixed(2)}</p>
+			</div>
+			<div className={styles["button-wrapper"]}>
+				<Button onClick={submitOrderHandler}>Order</Button>
+			</div>
+		</Card>
 	);
 }
 
