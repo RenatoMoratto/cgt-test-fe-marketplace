@@ -1,6 +1,6 @@
 import styles from "./CartItem.module.css";
 
-const CartItem = ({ name, price, amount, image }) => {
+function CartItem({ name, price, amount, image, onRemove, onAdd }) {
 	return (
 		<li className={styles["cart-item"]}>
 			<picture className={styles.image}>
@@ -14,8 +14,12 @@ const CartItem = ({ name, price, amount, image }) => {
 					<span className={styles.amount}>x {amount}</span>
 				</div>
 			</div>
+			<div className={styles.actions}>
+				<button onClick={onAdd}>+</button>
+				<button onClick={onRemove}>−</button>
+			</div>
 		</li>
 	);
-};
+}
 
 export default CartItem;

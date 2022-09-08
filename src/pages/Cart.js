@@ -8,6 +8,14 @@ import styles from "./Cart.module.css";
 function Cart() {
 	const cartCtx = useContext(CartContext);
 
+	const cartItemRemoveHandler = id => {
+		cartCtx.removeItem(id);
+	};
+
+	const cartItemAddHandler = item => {
+		cartCtx.addItem(item);
+	};
+
 	const submitOrderHandler = () => {
 		cartCtx.clearCart();
 	};
@@ -23,6 +31,8 @@ function Cart() {
 						price={cartItem.price}
 						amount={cartItem.amount}
 						image={cartItem.imageURL}
+						onRemove={cartItemRemoveHandler.bind(null, cartItem.id)}
+						onAdd={cartItemAddHandler.bind(null, cartItem)}
 					/>
 				))}
 			</ul>
