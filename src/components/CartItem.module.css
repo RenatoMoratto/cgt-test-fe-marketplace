@@ -19,7 +19,7 @@
 
 .summary {
 	display: flex;
-	justify-content: space-between;
+	align-items: center;
 }
 
 .image {
@@ -34,6 +34,7 @@
 }
 
 .price {
+	margin-right: 1rem;
 	font-size: 1.3em;
 	font-weight: 300;
 	color: #43474d;
