@@ -33,16 +33,26 @@ function Home() {
 						<h3>You are probably interested in:</h3>
 						<div className={styles["interest-products-grid"]}>
 							{userInterests.map(item => (
-								<CardImage href={`/products?id=${item.id}`} name={item.name} imageURL={item.imageURL} />
+								<CardImage
+									href={`/products?id=${item.id}`}
+									name={item.name}
+									imageURL={item.imageURL}
+									price={item.price}
+								/>
 							))}
 						</div>
 					</Card>
-					
+
 					<Card>
 						<h3>Check out the newest product!</h3>
 						<div className={styles["newest-products-grid"]}>
 							{newests.map(item => (
-								<CardImage href={`/products?id=${item.id}`} name={item.name} imageURL={item.imageURL} />
+								<CardImage
+									href={`/products?id=${item.id}`}
+									name={item.name}
+									imageURL={item.imageURL}
+									price={item.price}
+								/>
 							))}
 						</div>
 					</Card>
