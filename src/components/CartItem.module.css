@@ -11,6 +11,7 @@
 
 .cart-item-info h2 {
 	margin: 0;
+	font-size: 1.40rem;
 	font-weight: 300;
 	color: #131313;
 }
@@ -80,6 +81,10 @@
 @media (max-width: 768px) {
 	.cart-item h2 {
 		font-size: 1rem;
+	}
+
+	.description {
+		justify-content: space-evenly;
 	}
 
 	.price {
