@@ -13,7 +13,8 @@ ul,
 li,
 h1,
 h2,
-p {
+p,
+span {
 	margin: 0;
 	padding: 0;
 }
