@@ -36,7 +36,7 @@ function Home() {
 								<CardImage
 									href={`/products?id=${item.id}`}
 									name={item.name}
-									imageURL={item.imageURL}
+									image={item.image}
 									price={item.price}
 								/>
 							))}
@@ -50,7 +50,7 @@ function Home() {
 								<CardImage
 									href={`/products?id=${item.id}`}
 									name={item.name}
-									imageURL={item.imageURL}
+									image={item.image}
 									price={item.price}
 								/>
 							))}

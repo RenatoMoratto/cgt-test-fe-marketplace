@@ -30,7 +30,7 @@ function Cart() {
 						name={cartItem.name}
 						price={cartItem.price}
 						amount={cartItem.amount}
-						image={cartItem.imageURL}
+						image={cartItem.image}
 						onRemove={cartItemRemoveHandler.bind(null, cartItem.id)}
 						onAdd={cartItemAddHandler.bind(null, cartItem)}
 					/>

@@ -8,7 +8,7 @@ import styles from "./Product.module.css";
 const defaultProductValue = {
 	name: "",
 	description: "",
-	imageURL: "",
+	image: "",
 	price: 0.0,
 };
 
@@ -41,7 +41,7 @@ function Product() {
 			{!isLoading && (
 				<div className={styles.layout}>
 					<div className={styles.image}>
-						<img src={product.imageURL} alt="" />
+						<img src={product.image} alt="" />
 					</div>
 
 					<Card className={styles.card}>
