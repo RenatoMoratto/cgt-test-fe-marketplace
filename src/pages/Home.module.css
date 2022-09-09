@@ -28,5 +28,26 @@
 	display: grid;
 	grid-auto-columns: 1fr;
 	align-items: center;
-	row-gap: 8px;
+	gap: 8px;
+}
+
+@media (max-width: 425px) {
+	.home h2 {
+		font-size: 1.5em;
+	}
+
+	.products {
+		grid-template-columns: 100%;
+	}
+
+	.products h3 {
+		font-size: 1em;
+	}
+
+	.newest-products-grid,
+	.interest-products-grid {
+		grid-auto-columns: 12rem;
+		grid-auto-flow: column;
+		overflow-x: scroll;
+	}
 }

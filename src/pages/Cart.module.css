@@ -1,5 +1,5 @@
 .cart {
-	margin-top: 1rem;
+	margin: 1rem 0;
 }
 
 .cart p {
@@ -17,4 +17,15 @@
 .button-wrapper {
 	display: flex;
 	justify-content: flex-end;
+}
+
+@media (max-width: 425px) {
+	.total p,
+	.cart p {
+		font-size: 1.2rem;
+	}
+
+	.button-wrapper {
+		justify-content: center;
+	}
 }
