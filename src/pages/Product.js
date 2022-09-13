@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import CartContext from "../store/cart-context";
 import Card from "../components/Card";
 import Button from "../components/Button";
-import { getProductById } from "../api";
 import styles from "./Product.module.css";
 
 const defaultProductValue = {
@@ -18,8 +17,7 @@ function Product() {
 	const [product, setProduct] = useState(defaultProductValue);
 	const [isLoading, setIsLoading] = useState(true);
 
-	const query = window.location.search;
-	const id = query.replace("?id=", "");
+	const pathname = window.location.href.split("products/")[1];
 
 	const price = product.price.toFixed(2);
 
@@ -30,10 +28,11 @@ function Product() {
 	useEffect(() => {
 		setIsLoading(true);
 
-		getProductById(Number(id))
-			.then(response => setProduct(response))
+		fetch(`${process.env.REACT_APP_API_URL}/${pathname}`)
+			.then(response => response.json())
+			.then(data => setProduct(data))
 			.finally(() => setIsLoading(false));
-	}, [id]);
+	}, [pathname]);
 
 	return (
 		<>

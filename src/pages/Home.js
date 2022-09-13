@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getNewestProducts, getUserInterestProducts } from "../api";
 import Card from "../components/Card";
 import CardImage from "../components/CardImage";
 import styles from "./Home.module.css";
@@ -12,12 +11,14 @@ function Home() {
 	useEffect(() => {
 		setIsLoading(true);
 
-		getUserInterestProducts()
-			.then(response => setUserInterests(response))
+		fetch(`${process.env.REACT_APP_API_URL}/user-interests`)
+			.then(response => response.json())
+			.then(data => setUserInterests(data))
 			.finally(() => setIsLoading(false));
 
-		getNewestProducts()
-			.then(response => setNewests(response))
+		fetch(`${process.env.REACT_APP_API_URL}/newests`)
+			.then(response => response.json())
+			.then(data => setNewests(data))
 			.finally(() => setIsLoading(false));
 	}, []);
 
@@ -34,7 +35,7 @@ function Home() {
 							{userInterests.map(item => (
 								<CardImage
 									key={item.id}
-									href={`/products?id=${item.id}`}
+									href={`products/user-interests/${item.id}`}
 									name={item.name}
 									image={item.image}
 									price={item.price}
@@ -44,12 +45,12 @@ function Home() {
 					</Card>
 
 					<Card>
-						<h3>Check out the newest product!</h3>
+						<h3>Check out the newests products!</h3>
 						<div className={styles["newest-products-grid"]}>
 							{newests.map(item => (
 								<CardImage
 									key={item.id}
-									href={`/products?id=${item.id}`}
+									href={`products/newests/${item.id}`}
 									name={item.name}
 									image={item.image}
 									price={item.price}

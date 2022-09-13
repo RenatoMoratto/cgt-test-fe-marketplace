@@ -12,7 +12,7 @@ function App() {
 			<Header />
 			<main>
 				{pathname === "/" && <Home />}
-				{pathname === "/products" && <Product />}
+				{pathname.includes("/products") && <Product />}
 				{pathname === "/cart" && <Cart />}
 			</main>
 		</CartProvider>
