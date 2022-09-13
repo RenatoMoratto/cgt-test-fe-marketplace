@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../components/Card";
+import Spinner from "../components/Spinner";
 import CardImage from "../components/CardImage";
 import styles from "./Home.module.css";
 
@@ -26,7 +27,7 @@ function Home() {
 		<div className={styles.home}>
 			<h2>Welcome to our shop!</h2>
 
-			{isLoading && <p>Loading...</p>}
+			{isLoading && <Spinner />}
 			{!isLoading && (
 				<div className={styles.products}>
 					<Card>
@@ -45,7 +46,7 @@ function Home() {
 					</Card>
 
 					<Card>
-						<h3>Check out the newests products!</h3>
+						<h3>Check out the newest products!</h3>
 						<div className={styles["newest-products-grid"]}>
 							{newests.map(item => (
 								<CardImage
