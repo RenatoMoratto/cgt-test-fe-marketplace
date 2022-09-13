@@ -23,9 +23,8 @@ function Home() {
 
 	return (
 		<div className={styles.home}>
-			<Card>
-				<h2>Welcome to our shop!</h2>
-			</Card>
+			<h2>Welcome to our shop!</h2>
+
 			{isLoading && <p>Loading...</p>}
 			{!isLoading && (
 				<div className={styles.products}>
@@ -34,6 +33,7 @@ function Home() {
 						<div className={styles["interest-products-grid"]}>
 							{userInterests.map(item => (
 								<CardImage
+									key={item.id}
 									href={`/products?id=${item.id}`}
 									name={item.name}
 									image={item.image}
@@ -48,6 +48,7 @@ function Home() {
 						<div className={styles["newest-products-grid"]}>
 							{newests.map(item => (
 								<CardImage
+									key={item.id}
 									href={`/products?id=${item.id}`}
 									name={item.name}
 									image={item.image}
