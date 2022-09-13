@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
 const CartContext = React.createContext({
 	items: [],
@@ -13,80 +13,87 @@ const defaultCartState = {
 	totalAmount: 0,
 };
 
-export function CartProvider({ children }) {
-	const cartLocalStorageValue = JSON.parse(localStorage.getItem("cart"));
+const cartReducer = (state, action) => {
+	if (action.type === "ADD") {
+		const updatedTotalAmount = state.totalAmount + action.item.price;
 
-	const [cart, setCart] = useState(cartLocalStorageValue ?? defaultCartState);
-
-	function addItemToCartHandler(item) {
-		const updatedTotalAmount = cart.totalAmount + item.price;
-
-		const existingItemIndex = cart.items.findIndex(cartItem => cartItem.id === item.id);
-		const existingItem = cart.items[existingItemIndex];
+		const existingItemIndex = state.items.findIndex(cartItem => cartItem.id === action.item.id);
+		const existingItem = state.items[existingItemIndex];
 
 		let updatedItems;
 
 		if (existingItem) {
 			const updatedItem = { ...existingItem, amount: existingItem.amount + 1 };
 
-			updatedItems = [...cart.items];
+			updatedItems = [...state.items];
 			updatedItems[existingItemIndex] = updatedItem;
 		} else {
-			updatedItems = cart.items.concat({ ...item, amount: 1 });
+			updatedItems = state.items.concat({ ...action.item, amount: 1 });
 		}
 
-		localStorage.setItem(
-			"cart",
-			JSON.stringify({
-				items: updatedItems,
-				totalAmount: updatedTotalAmount,
-			})
-		);
-
-		setCart({
+		const updatedCart = {
 			items: updatedItems,
 			totalAmount: updatedTotalAmount,
-		});
+		};
+
+		localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+		return updatedCart;
 	}
 
-	const removeItemFromCartHandler = id => {
-		const existingItemIndex = cart.items.findIndex(item => item.id === id);
-		const existingItem = cart.items[existingItemIndex];
+	if (action.type === "REMOVE") {
+		const existingItemIndex = state.items.findIndex(item => item.id === action.id);
+		const existingItem = state.items[existingItemIndex];
 
-		const updatedTotalAmount = cart.totalAmount - existingItem.price;
+		const updatedTotalAmount = state.totalAmount - existingItem.price;
 
 		let updatedItems;
 
 		if (existingItem.amount === 1) {
-			updatedItems = cart.items.filter(item => item.id !== id);
+			updatedItems = state.items.filter(item => item.id !== action.id);
 		} else {
 			const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
-			updatedItems = [...cart.items];
+			updatedItems = [...state.items];
 			updatedItems[existingItemIndex] = updatedItem;
 		}
 
-		localStorage.setItem(
-			"cart",
-			JSON.stringify({
-				items: updatedItems,
-				totalAmount: updatedTotalAmount,
-			})
-		);
-
-		setCart({
+		const updatedCart = {
 			items: updatedItems,
 			totalAmount: updatedTotalAmount,
-		});
+		};
+
+		localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+		return updatedCart;
+	}
+
+	if (action.type === "CLEAR") {
+		localStorage.removeItem("cart");
+
+		return defaultCartState;
+	}
+};
+
+export function CartProvider({ children }) {
+	const cartLocalStorageValue = JSON.parse(localStorage.getItem("cart"));
+
+	const [cartState, dispatchCartAction] = useReducer(cartReducer, cartLocalStorageValue ?? defaultCartState);
+
+	const addItemToCartHandler = item => {
+		dispatchCartAction({ type: "ADD", item: item });
+	};
+
+	const removeItemFromCartHandler = id => {
+		dispatchCartAction({ type: "REMOVE", id: id });
 	};
 
 	function clearCartHandler() {
-		localStorage.removeItem("cart");
-		setCart(defaultCartState);
+		dispatchCartAction({ type: "CLEAR" });
 	}
 
 	const cartContext = {
-		items: cart.items,
-		totalAmount: cart.totalAmount,
+		items: cartState.items,
+		totalAmount: cartState.totalAmount,
 		addItem: addItemToCartHandler,
 		removeItem: removeItemFromCartHandler,
 		clearCart: clearCartHandler,
