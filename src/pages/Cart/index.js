@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import CartItem from "../components/CartItem";
-import Card from "../components/Card";
-import Button from "../components/Button";
-import CartContext from "../store/cart-context";
+import CartItem from "../../components/CartItem";
+import Card from "../../components/Card";
+import Button from "../../components/Button";
+import CartContext from "../../store/cart-context";
 import styles from "./Cart.module.css";
 
 function Cart() {
