@@ -5,7 +5,7 @@ function CartItem({ name, price, amount, image, onRemove, onAdd }) {
 		<li className={styles["cart-item"]}>
 			<div className={styles["cart-item-info"]}>
 				<picture className={styles.image}>
-					<img src={image} alt="" />
+					<img src={image} alt={name} />
 				</picture>
 				<div className={styles.description}>
 					<h2>{name}</h2>
