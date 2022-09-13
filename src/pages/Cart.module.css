@@ -2,13 +2,18 @@
 	margin: 1rem 0;
 }
 
-.cart p {
+.empty-cart {
+	padding: 3rem;
+	text-align: center;
 	font-size: 1.5rem;
+	color: #43474d;
 }
 
-.cart > p {
-	font-size: 1.75rem;
-	font-weight: bold;
+.empty-cart p {
+	font-size: 1rem;
+}
+.empty-cart a {
+	color: #4c2c93;
 }
 
 .total {
@@ -19,6 +24,10 @@
 	margin: 1rem 0;
 }
 
+.total p {
+	font-size: 1.5rem;
+}
+
 .button-wrapper {
 	display: flex;
 	justify-content: flex-end;
@@ -26,7 +35,7 @@
 
 @media (max-width: 425px) {
 	.total p,
-	.cart p {
+	.empty-cart {
 		font-size: 1.2rem;
 	}
 
