@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Card from "../components/Card";
-import Spinner from "../components/Spinner";
-import CardImage from "../components/CardImage";
+import Card from "../../components/Card";
+import Spinner from "../../components/Spinner";
+import CardImage from "../../components/CardImage";
 import styles from "./Home.module.css";
 
 function Home() {
