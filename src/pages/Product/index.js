@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import CartContext from "../store/cart-context";
-import Card from "../components/Card";
-import Spinner from "../components/Spinner";
-import Button from "../components/Button";
+import CartContext from "../../store/cart-context";
+import Card from "../../components/Card";
+import Spinner from "../../components/Spinner";
+import Button from "../../components/Button";
 import styles from "./Product.module.css";
 
 const defaultProductValue = {
