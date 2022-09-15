@@ -28,6 +28,19 @@ Good luck!
 
 ---
 
+## Running json-server mock API
+
+First, install json-server  on your local machine with `npm install -g json-server`
+
+Navigate to the root of this repository and start the mock API with the following command:
+```
+json-server --w ./src/api/db.json --p 8080 -s ./src/api/public/
+```
+
+After that everything is ready to go
+
+---
+
 ## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
